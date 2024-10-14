@@ -31,7 +31,7 @@ public class Review {
  private House house;
  
  @Column(name="review")
- private Integer review;
+ private Integer score;
  
  @Column(name="created_at",insertable=false,updatable=false)
  private Timestamp createdAt;

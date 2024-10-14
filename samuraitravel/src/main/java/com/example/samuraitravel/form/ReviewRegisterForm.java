@@ -7,7 +7,9 @@ import lombok.Data;
 @Data
 public class ReviewRegisterForm {
  @NotNull
- private Integer review;
+ private Integer HouseId;
+ @NotNull
+ private Integer Score;
  
  @NotBlank
  private String content;

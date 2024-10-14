@@ -1,26 +1,34 @@
 package com.example.samuraitravel.service;
+ 
+ import org.springframework.stereotype.Service;
 
-import org.springframework.stereotype.Service;
+import com.example.samuraitravel.entity.House;
+import com.example.samuraitravel.entity.Review;
+import com.example.samuraitravel.entity.User;
+import com.example.samuraitravel.form.ReviewRegisterForm;
+import com.example.samuraitravel.repository.ReviewRepository;
 
-@Service
-public class ReviewService {
-//	public final ReviewRepository reviewRepository;
+import jakarta.transaction.Transactional;
  
-// public ReviewRepository(ReviewRepository reviewRepository) {
-//	 this.reviewRepository = reviewRepository;
-// }
- 
-// @Transactional
-// public void create(ReviewRegisterForm reviewRegisterForm) {
-//	 Review review = new Review();
-	 
-// }
-// review.setUserId(reviewRegisterForm.getUserId());
-// review.setHousesId(reviewRegisterForm.getHousesId());
-// review.setReview(reviewRegisterForm.getReview());
-// review.setDay(reviewRegisterForm.getDay());
-// review.setContent(reviewRegisterForm.getContent());
- 
-// houseRepository.save(review);
- 
-}
+ @Service
+ public class ReviewService {
+     private final ReviewRepository reviewRepository;        
+     
+     public ReviewService(ReviewRepository reviewRepository) {        
+         this.reviewRepository = reviewRepository;        
+     }     
+     
+     @Transactional
+     public void create(ReviewRegisterForm reviewRegisterForm) {
+    	 Review review = new Review();
+    	
+    	 review.setScore(reviewRegisterForm.getScore());
+    	 review.setContent(reviewRegisterForm.getContent());
+    	 
+    	 reviewRepository.save(review);
+     }
+     
+     public boolean hasUserAlreadyReviewed(House house, User user) {
+         return reviewRepository.findByHouseAndUser(house, user) != null;
+     }
+ }

@@ -1,21 +1,22 @@
 package com.example.samuraitravel.security;
 
  import java.util.ArrayList;
- import java.util.Collection;
- 
- import org.springframework.security.core.GrantedAuthority;
- import org.springframework.security.core.authority.SimpleGrantedAuthority;
- import org.springframework.security.core.userdetails.UserDetails;
- import org.springframework.security.core.userdetails.UserDetailsService;
- import org.springframework.security.core.userdetails.UsernameNotFoundException;
- import org.springframework.stereotype.Service;
- 
- import com.example.samuraitravel.entity.User;
- import com.example.samuraitravel.repository.UserRepository;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.example.samuraitravel.entity.User;
+import com.example.samuraitravel.repository.UserRepository;
  
  @Service
  public class UserDetailsServiceImpl implements UserDetailsService {
-     private final UserRepository userRepository;    
+     private final UserRepository userRepository;
+	private User user;    
      
      public UserDetailsServiceImpl(UserRepository userRepository) {
          this.userRepository = userRepository;        
@@ -33,5 +34,10 @@ package com.example.samuraitravel.security;
              throw new UsernameNotFoundException("ユーザーが見つかりませんでした。");
          }
      }   
+     
+     public User getUser() {
+    	 
+    	 return this.user;
+     }
 }
 
