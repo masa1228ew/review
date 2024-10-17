@@ -17,6 +17,5 @@ public Page<House> findByPriceLessThanEqualOrderByCreatedAtDesc(Integer price, P
 public Page<House> findByPriceLessThanEqualOrderByPriceAsc(Integer price, Pageable pageable); 
 public Page<House> findAllByOrderByCreatedAtDesc(Pageable pageable);
 public Page<House> findAllByOrderByPriceAsc(Pageable pageable);
-public House findByhouseId(Integer id);
 public List<House> findTop10ByOrderByCreatedAtDesc();
 }

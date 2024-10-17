@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.form.HouseEditForm;
 import com.example.samuraitravel.form.HouseRegisterForm;
-import com.example.samuraitravel.form.ReviewRegisterForm;
 import com.example.samuraitravel.repository.HouseRepository;
 //import com.example.samuraitravel.repository.ReviewRepository;
 import com.example.samuraitravel.service.HouseService;
@@ -58,7 +57,7 @@ public class AdminHouseController {
 	  model.addAttribute("house",house);
 //	  model.addAttribute("reviews", reviews);
 	  
-	  model.addAttribute("reviewRegisterForm", new ReviewRegisterForm());
+//	  model.addAttribute("reviewRegisterForm", new ReviewRegisterForm());
 	  
 	  return "admin/houses/show";
   }
