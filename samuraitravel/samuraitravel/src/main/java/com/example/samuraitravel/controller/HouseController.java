@@ -23,6 +23,7 @@ import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.entity.Review;
 import com.example.samuraitravel.entity.User;
 import com.example.samuraitravel.form.ReservationInputForm;
+import com.example.samuraitravel.form.ReviewEditForm;
 import com.example.samuraitravel.form.ReviewRegisterForm;
 import com.example.samuraitravel.repository.HouseRepository;
 import com.example.samuraitravel.repository.ReviewRepository;
@@ -129,18 +130,20 @@ public class HouseController {
    	  return "redirect:/houses/show";
      }
      
-//     @GetMapping("/houses/{houseId}/review/{reviewId}/edit")
-//     public String reviewedit(@PathVariable("houseId") Integer houseId, 
-//                              @PathVariable("reviewId") Integer reviewId, 
-//                              Model model) {
+     @GetMapping("/houses/{houseId}/review/{reviewId}/edit")
+     public String reviewedit(@PathVariable("houseId") Integer houseId, 
+                              @PathVariable("reviewId") Integer reviewId, 
+                              Model model) {
 //         House house = houseRepository.getReferenceById(houseId);
-//         Review review = reviewRepository.getReferenceById(reviewId);
-//    	 ReviewEditForm reviewEditForm = new ReviewEditForm(review.getScore(),review.getContent());
-//    	 model.addAttribute("house", house);
-//    	 model.addAttribute("reviewEditForm",reviewEditForm);
+    	 House house = houseRepository.getReferenceById(houseId);
+         Review review = reviewRepository.getReferenceById(reviewId);
+    	 ReviewEditForm reviewEditForm = new ReviewEditForm(review.getScore(),review.getContent());
+    	 model.addAttribute("houseId", house);
+    	 model.addAttribute("reviewId",review);
+    	 model.addAttribute("reviewEditForm",reviewEditForm);
     	 
     	 
-//    	 return "houses/review/edit";
-//   }
+    	 return "houses/review/edit";
+   }
      
 }
