@@ -9,15 +9,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.entity.Review;
@@ -114,21 +109,34 @@ public class HouseController {
          House house = houseRepository.getReferenceById(id);
          model.addAttribute("house", house); 
     	 model.addAttribute("reviewRegisterForm", new ReviewRegisterForm());
-    	 return "houses/review/register";
+    	 return "review/register";
     	
      }
      
-     @PostMapping("/{id}/review/create")
-     public String create(@ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm,BindingResult bindingResult,RedirectAttributes redirectAttributes ) {
-   	  if(bindingResult.hasErrors()) {
-   		  return "houses/review/register";
-   	  }
-   	  reviewService.create(reviewRegisterForm);
-   	  redirectAttributes.addAttribute("successMessage","レビューを投稿しました。");
+//     @PostMapping("/review/create")
+//     public String create(@ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm,BindingResult bindingResult,RedirectAttributes redirectAttributes ) {
+//   	  if(bindingResult.hasErrors()) {
+//   		  return "houses/review/register";
+//   	  }
+//   	  reviewService.create(reviewRegisterForm);
+//   	  redirectAttributes.addAttribute("successMessage","レビューを投稿しました。");
    	  
-   	  return "redirect:/houses/show";
-     }
+//   	  return "redirect:/houses/show";
+//     }
      
+//     @PostMapping("{id}/create")
+// 	public String create(@PathVariable(name = "id") Integer id, @ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+// 		if(bindingResult.hasErrors()) {
+ 			
+// 			return "review/reviewRegister";
+// 		}
+ 		
+// 		reviewService.create(reviewRegisterForm, userDetailsImpl);
+// 		redirectAttributes.addFlashAttribute("successMessage", "レビューを登録しました。");
+ 		
+// 		return "redirect:/houses/show";
+// 	}
+
 //     @GetMapping("/houses/{houseId}/review/{reviewId}/edit")
 //     public String reviewedit(@PathVariable("houseId") Integer houseId, 
 //                              @PathVariable("reviewId") Integer reviewId, 
@@ -143,4 +151,23 @@ public class HouseController {
 //    	 return "houses/review/edit";
 //   }
      
+//     @PostMapping("/houses/{houseId}/review/{reviewid}/delete")
+//     public String delete(@PathVariable(name="houseId") Integer houseId,@PathVariable(name="reviewId") Integer reviewId,RedirectAttributes redirectAttributes) {
+//    	 House house = houseRepository.getReferenceById(houseId);
+//    	 reviewRepository.deleteById(reviewId);
+    	 
+//    	  redirectAttributes.addFlashAttribute("successMessage", "レビューを削除しました。");
+    	  
+//    	  return "redirect:/houses/show";
+//     }
+     
+//     @PostMapping("houses/{houseId}/review/{reviewId}/delete")
+//     public String delete(@PathVariable(name="id") Integer id,RedirectAttributes redirectAttributes) {
+    	 
+//    	 reviewRepository.deleteById(id);
+    	 
+//    	  redirectAttributes.addFlashAttribute("successMessage", "レビューを削除しました。");
+    	  
+//    	  return "redirect:/houses/show";
+//     }
 }

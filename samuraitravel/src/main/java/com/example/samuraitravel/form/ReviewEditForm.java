@@ -9,8 +9,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ReviewEditForm {
-//  @NotNull
-//  private Integer id;
+  @NotNull
+  private Integer id;
   
 //  @NotNull
 //  private Integer user;
