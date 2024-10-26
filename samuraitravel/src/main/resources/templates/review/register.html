@@ -23,7 +23,7 @@
                                  </ol>
                              </nav> 
                               <h1 class="mb-4 text-center">レビュー投稿</h1> 
-                              <form method="post" th:action="@{/houses/review/create}" th:object="${reviewRegisterForm}" enctype="multipart/form-data">
+                              <form method="post" th:action="@{/houses/__${house.getId()}__/review/create}" th:object="${reviewRegisterForm}" enctype="multipart/form-data">
 								  <div class="form-group row mb-3">
 									 <div class="col-md-4">
 										 <label for="name" class="col-form-label text-md-left fw-bold">評価</label>

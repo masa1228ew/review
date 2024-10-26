@@ -146,7 +146,7 @@
                                       <h2 class="mb-4 text-center">レビュー</h2>
                                       <div sec:authorize="isAuthenticated()" th:unless="${hasUserAlreadyReviewed}" class="row justify-content-center mb-4">
 										   <div class="col-lg-4">
-											    <a th:href="@{/{id}/review/register(id=${house.id})}" class="btn text-white shadow-sm w-100 samuraitravel-btn">レビューを投稿する</a>
+											    <a th:href="@{/houses/{id}/review/register(id=${house.id})}" class="btn text-white shadow-sm w-100 samuraitravel-btn">レビューを投稿する</a>
 										   </div>
 									  </div>    
 									 <div th:if="${#lists.isEmpty(newReviews)}" class="mb-4">
