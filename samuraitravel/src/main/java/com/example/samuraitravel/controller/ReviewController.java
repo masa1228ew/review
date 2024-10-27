@@ -2,10 +2,7 @@ package com.example.samuraitravel.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -13,7 +10,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.entity.Review;
 import com.example.samuraitravel.form.ReviewEditForm;
-import com.example.samuraitravel.form.ReviewRegisterForm;
 import com.example.samuraitravel.repository.HouseRepository;
 import com.example.samuraitravel.repository.ReviewRepository;
 import com.example.samuraitravel.service.ReviewService;
@@ -90,14 +86,14 @@ public class ReviewController{
     	  return "redirect:/houses/show";
      }
      
-     @PostMapping("/review/create")
-     public String create(@ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm,BindingResult bindingResult,RedirectAttributes redirectAttributes ) {
-   	  if(bindingResult.hasErrors()) {
-   		  return "/review/register";
-   	  }
-   	  reviewService.create(reviewRegisterForm);
-   	  redirectAttributes.addAttribute("successMessage","レビューを投稿しました。");
+//     @PostMapping("/review/create")
+//     public String create(@ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm,BindingResult bindingResult,RedirectAttributes redirectAttributes ) {
+//   	  if(bindingResult.hasErrors()) {
+//   		  return "/review/register";
+//   	  }
+//   	  reviewService.create(reviewRegisterForm);
+//   	  redirectAttributes.addAttribute("successMessage","レビューを投稿しました。");
    	  
-   	  return "redirect:/houses/show";
-     }
+//   	  return "redirect:/houses/show";
+//     }
 }

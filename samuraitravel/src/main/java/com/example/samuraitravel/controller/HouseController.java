@@ -119,10 +119,13 @@ public class HouseController {
      }
      
      @PostMapping("/{id}/review/create")
-     public String create(@ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm,BindingResult bindingResult,RedirectAttributes redirectAttributes ) {
+     public String create(@PathVariable(name = "id") Integer id,Model model,@ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm,BindingResult bindingResult,RedirectAttributes redirectAttributes ) {
    	  if(bindingResult.hasErrors()) {
    		  return "review/register";
    	  }
+   	 House house = houseRepository.getReferenceById(id);
+   	 
+   	  model.addAttribute("house", house); 
    	  reviewService.create(reviewRegisterForm);
    	  redirectAttributes.addAttribute("successMessage","レビューを投稿しました。");
    	  
