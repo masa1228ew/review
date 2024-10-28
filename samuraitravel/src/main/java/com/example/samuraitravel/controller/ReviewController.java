@@ -1,17 +1,25 @@
 package com.example.samuraitravel.controller;
 
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.entity.Review;
+import com.example.samuraitravel.entity.User;
 import com.example.samuraitravel.form.ReviewEditForm;
+import com.example.samuraitravel.form.ReviewRegisterForm;
 import com.example.samuraitravel.repository.HouseRepository;
 import com.example.samuraitravel.repository.ReviewRepository;
+import com.example.samuraitravel.security.UserDetailsImpl;
 import com.example.samuraitravel.service.ReviewService;
 
 @Controller
@@ -58,10 +66,33 @@ public class ReviewController{
 //		model.addAttribute("newReview",newReview);
 //		return "house/show";
 //	}
-     @GetMapping("/houses/{houseId}/review/{reviewId}/edit")
+	 @PostMapping("/houses/{houseId}/review/create")
+	  public String create(@PathVariable(name = "houseId") Integer houseId,
+             @AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
+             @ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm,
+             BindingResult bindingResult,
+             RedirectAttributes redirectAttributes,
+             Model model)
+	{    
+		House house = houseRepository.getReferenceById(houseId);
+		User user = userDetailsImpl.getUser();
+		
+		if (bindingResult.hasErrors()) {
+			System.out.println(bindingResult.hasErrors());
+			model.addAttribute("house", house);
+			
+			return "review/register";
+		}        
+		reviewService.create(house, user, reviewRegisterForm);
+		redirectAttributes.addFlashAttribute("successMessage", "レビューを投稿しました。");    
+		
+		return "redirect:/houses/{houseId}";
+	}
+		
+	@GetMapping("/houses/{houseId}/review/{reviewId}/edit")
      public String edit(      @PathVariable(name="houseId") Integer houseId,
-                              @PathVariable(name="reviewId") Integer reviewId, 
-                              Model model) {
+             @PathVariable(name="reviewId") Integer reviewId, 
+             Model model) {
         House house = houseRepository.getReferenceById(houseId);
          Review review = reviewRepository.getReferenceById(reviewId);
     	 ReviewEditForm reviewEditForm = new ReviewEditForm(review.getId(),review.getScore(),review.getContent());
@@ -85,6 +116,23 @@ public class ReviewController{
     	  
     	  return "redirect:/houses/show";
      }
+     
+     @PostMapping("/houses/{houseId}/review/{reviewId}/update")
+     public String update(@PathVariable(name = "houseId") Integer houseId,
+             @AuthenticationPrincipal UserDetailsImpl userDetailsImpl,@ModelAttribute @Validated ReviewEditForm reviewEditForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model) { 
+    	 House house = houseRepository.getReferenceById(houseId);
+ 		User user = userDetailsImpl.getUser();
+         if (bindingResult.hasErrors()) {
+        	 System.out.println(bindingResult.hasErrors());
+ 			model.addAttribute("house", house);
+             return "review/edit";
+         }
+         
+         reviewService.update(house,user,reviewEditForm);
+         redirectAttributes.addFlashAttribute("successMessage", "レビューを編集しました。");
+         
+         return "redirect:/houses/{houseId}";
+     }    
      
 //     @PostMapping("/review/create")
 //     public String create(@ModelAttribute @Validated ReviewRegisterForm reviewRegisterForm,BindingResult bindingResult,RedirectAttributes redirectAttributes ) {

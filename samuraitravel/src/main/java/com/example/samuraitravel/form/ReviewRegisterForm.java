@@ -9,7 +9,7 @@ public class ReviewRegisterForm {
 // @NotNull
 // private Integer HouseId;
  @NotNull
- private Integer Score;
+ private Integer score;
  
  @NotBlank
  private String content;
