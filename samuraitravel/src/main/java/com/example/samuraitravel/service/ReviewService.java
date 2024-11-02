@@ -35,13 +35,13 @@ import jakarta.transaction.Transactional;
          return reviewRepository.findByHouseAndUser(house, user) != null;
      }
      @Transactional
-     public void update(House house, User user,ReviewEditForm reviewEditForm) {
+     public void update(ReviewEditForm reviewEditForm) {
          Review review = reviewRepository.getReferenceById(reviewEditForm.getId());
         
          
         
-         review.setHouse(house);                
-         review.setUser(user);
+//         review.setHouse(house);                
+//         review.setUser(user);
 //         review.setId(reviewEditForm.getId());                
          review.setScore(reviewEditForm.getScore());
          review.setContent(reviewEditForm.getContent());

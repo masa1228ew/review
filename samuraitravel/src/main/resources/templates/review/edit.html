@@ -33,14 +33,14 @@
 									</div>
 									<div class="col-md-8"> 
 										<div th:if="${#fields.hasErrors('score')}" class="text-danger small mb-2" th:errors="*{score}"></div>                                    
-                                         <select name="example">
-<option value="auto">レビュースコア</option>
+                                        <select class="form-select samuraitravel-star" th:field="*{score}">
+
 <hr>
-<option value="one">★☆☆☆☆</option>
-<option value="two">★★☆☆☆</option>
-<option value="three">★★★☆☆</option>
-<option value="four">★★★★☆</option>
-<option value="five">★★★★★</option>
+<option value="1">★☆☆☆☆</option>
+<option value="2">★★☆☆☆</option>
+<option value="3">★★★☆☆</option>
+<option value="4">★★★★☆</option>
+<option value="5">★★★★★</option>
 </select>
 
 									</div>

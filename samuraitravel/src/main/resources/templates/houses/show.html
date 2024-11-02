@@ -192,7 +192,8 @@
 											 </div>
 										 </div>  
 										   <div class="text-center mb-4" th:if="${totalReviewCount > 6}">
-                                     <a th:href="@{/houses/__${house.getId()}__/review}">すべてのレビューを見る</a>
+                                     <a th:href="@{/houses/{id}/review/index(id=${house.getId()})}">すべてのレビューを見る</a>
+
                                  </div>                                                                                      
                                  </div>                                                                                             
                              </div>

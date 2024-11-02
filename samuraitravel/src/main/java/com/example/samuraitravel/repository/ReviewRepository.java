@@ -18,6 +18,8 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	public Review findByHouseAndUser(House house, User user);
 	public long countByHouse(House house);
 	public Page<Review> findByHouseOrderByCreatedAtDesc(House house, Pageable pageable);
+	public List<Review> findAllByHouseOrderByCreatedAtDesc(House house);
+	public Page<Review> findAllByHouseOrderByCreatedAtDesc(House house,Pageable pageable);
 }
 
  

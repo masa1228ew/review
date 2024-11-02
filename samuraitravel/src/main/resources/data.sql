@@ -98,3 +98,5 @@ INSERT IGNORE INTO review(id,user_id,house_id,review,created_at,content) VALUES(
 INSERT IGNORE INTO review(id,user_id,house_id,review,created_at,content) VALUES(9,3,4,5,'2023-05-02','また行きたい。');
 INSERT IGNORE INTO review(id,user_id,house_id,review,created_at,content) VALUES(10,4,5,4,'2023-05-09','いいよ。');
 INSERT IGNORE INTO review(id,user_id,house_id,review,created_at,content) VALUES(11,5,6,5,'2023-06-12','いきました。');
+INSERT IGNORE INTO review(id,user_id,house_id,review,created_at,content) VALUES(12,7,1,5,'2023-04-18','よかった');
+

@@ -113,6 +113,40 @@ public class HouseController {
     	
      }
      
+     @GetMapping("/{id}/review/index")
+     public String index(@PathVariable(name = "id") Integer id,Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+//    	 Page<Review> reviewPage = reviewRepository.findAll(pageable);
+    	 
+    	 
+//    	 House house = houseRepository.getReferenceById(id);
+//    	 List<Review> reviewPage = reviewRepository.findByHouse(house);
+    	  
+//    	 model.addAttribute("reviewPage",reviewPage);
+//    	 model.addAttribute(house);
+    	
+    	 House house = houseRepository.getReferenceById(id);
+         boolean hasUserAlreadyReviewed = false;
+         
+         if(userDetailsImpl!=null) {
+        	 User user = userDetailsImpl.getUser();
+        	 hasUserAlreadyReviewed = reviewService.hasUserAlreadyReviewed(house,user);
+         }
+//         List<Review> newReviews =reviewRepository.findTop6ByHouseOrderByCreatedAtDesc(house);
+         List<Review> reviewList = reviewRepository.findAllByHouseOrderByCreatedAtDesc(house);
+         Page<Review> reviewPage = reviewRepository.findAll(pageable);
+         long totalReviewCount = reviewRepository.countByHouse(house);  
+         
+         
+         model.addAttribute("house", house);         
+         model.addAttribute("reservationInputForm", new ReservationInputForm());
+         model.addAttribute("hasUserAlreadyReviewed", hasUserAlreadyReviewed);
+         model.addAttribute("reviewList",reviewList);
+         model.addAttribute("reviewPage",reviewPage);
+         model.addAttribute("totalReviewCount",totalReviewCount);
+    	 
+    	 return "/review/index";
+    	 
+     }
     
      
 //     @PostMapping("/{id}/review/create")
