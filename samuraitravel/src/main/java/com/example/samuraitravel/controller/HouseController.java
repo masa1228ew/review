@@ -133,7 +133,7 @@ public class HouseController {
          }
 //         List<Review> newReviews =reviewRepository.findTop6ByHouseOrderByCreatedAtDesc(house);
          List<Review> reviewList = reviewRepository.findAllByHouseOrderByCreatedAtDesc(house);
-         Page<Review> reviewPage = reviewRepository.findAll(pageable);
+         Page<Review> reviewPage = reviewRepository.findAllByHouseOrderByCreatedAtDesc(house,pageable);
          long totalReviewCount = reviewRepository.countByHouse(house);  
          
          

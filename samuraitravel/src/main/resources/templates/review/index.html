@@ -19,19 +19,27 @@
      <body>
          <div class="samuraitravel-wrapper">
              <!-- ヘッダー -->
-             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm samuraitravel-navbar">
-                 <div class="container samuraitravel-container">
-                     <a class="navbar-brand" th:href="@{/}">                        
-                         <img class="samuraitravel-logo me-1" th:src="@{/images/logo.png}" alt="SAMURAI Travel">                        
-                     </a>                                                                    
-                 </div>
-             </nav>
+<!--             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm samuraitravel-navbar">-->
+<!--                 <div class="container samuraitravel-container">-->
+<!--                     <a class="navbar-brand" th:href="@{/}">                        -->
+<!--                         <img class="samuraitravel-logo me-1" th:src="@{/images/logo.png}" alt="SAMURAI Travel">                        -->
+<!--                     </a>                                                                    -->
+<!--                 </div>-->
+<!--             </nav>-->
+<div th:replace="~{fragment::header}"></div>
              
              <main>
                  <div class="container pt-4 pb-5 samuraitravel-container">
                      <div class="row justify-content-center">
                          <div class="col-xxl-9 col-xl-10 col-lg-11">
-                             
+                             <nav class="mb-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                 <ol class="breadcrumb mb-0">                        
+                                     <li class="breadcrumb-item"><a th:href="@{/}">ホーム</a></li>
+                                     <li class="breadcrumb-item"><a th:href="@{/houses}">民宿一覧</a></li>
+                                      <li class="breadcrumb-item"><a th:href="@{/houses/{houseId}(houseId=${house.getId()})}">民宿詳細</a></li>
+                                     <li class="breadcrumb-item active" aria-current="page">レビュー一覧</li>
+                                 </ol>
+                             </nav> 
                              <h1 class="mb-4 text-center">レビュー一覧</h1>   
                              
                                                                                        
@@ -55,7 +63,7 @@
 <!--                                 </tbody>-->
 <!--                             </table>     -->
 
-<div th:unless="${#lists.isEmpty(newReviews)}" class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+<div th:unless="${#lists.isEmpty(reviewPage)}" class="row row-cols-1 row-cols-md-2 g-4 mb-4">
 											 <div th:each="review : ${reviewPage}">
 												  <div class="col">
 													  <div class="card">
